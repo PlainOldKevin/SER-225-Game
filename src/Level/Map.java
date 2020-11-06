@@ -64,7 +64,7 @@ public abstract class Map {
         this.tileset = tileset;
         setupMap();
         this.startBoundX = 0;
-        this.startBoundY = 0 ;
+        this.startBoundY = 0;
         this.endBoundX = width * tileset.getScaledSpriteWidth();
         this.endBoundY = height * tileset.getScaledSpriteHeight();
         this.xMidPoint = ScreenManager.getScreenWidth() / 2;
@@ -290,8 +290,6 @@ public abstract class Map {
     public void addEnemy(Enemy enemy) {
         enemy.setMap(this);
         this.enemies.add(enemy);
-        enemy.initialize();
-        enemy.initialize();
     }
 
     // add an enhanced map tile to the map's list of enhanced map tiles

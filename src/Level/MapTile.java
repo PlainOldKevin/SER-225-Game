@@ -5,7 +5,7 @@ import GameObject.Frame;
 import GameObject.ImageEffect;
 import GameObject.Rectangle;
 import GameObject.SpriteSheet;
-import java.awt.Color;
+
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 
