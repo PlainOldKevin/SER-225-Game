@@ -18,13 +18,10 @@ public abstract class Player extends GameObject {
     protected float jumpHeight = 0;
     protected float jumpDegrade = 0;
     protected float terminalVelocityY = 0;
-    protected float terminalVelocityX = 0;
     protected float momentumYIncrease = 0;
-    protected float momentumXIncrease = 0;
 
     // values used to handle player movement
     protected float jumpForce = 0;
-    protected float momentumX = 0;
     protected float momentumY = 0;
     protected float moveAmountX, moveAmountY;
 
@@ -62,7 +59,6 @@ public abstract class Player extends GameObject {
     public void update() {
         moveAmountX = 0;
         moveAmountY = 0;
-        
 
         // if player is currently playing through level (has not won or lost)
         if (levelState == LevelState.RUNNING) {
@@ -253,13 +249,6 @@ public abstract class Player extends GameObject {
             momentumY = terminalVelocityY;
         }
     }
-    
-    protected void increaseMomentumX() {
-        momentumX += momentumXIncrease;
-        if (momentumX > terminalVelocityX) {
-            momentumX = terminalVelocityX;
-        }
-    }
 
     protected void updateLockedKeys() {
         if (Keyboard.isKeyUp(JUMP_KEY)) {
@@ -269,25 +258,9 @@ public abstract class Player extends GameObject {
 
     @Override
     public void onEndCollisionCheckX(boolean hasCollided, Direction direction) {
-    	if (direction == Direction.LEFT || direction == Direction.RIGHT) {
-    		if (x < 0) {
-    			hasCollided = true;
-    			momentumX = 0;
-    			setX(0);
-    		}
-    		else if (x > 1700) {
-    			hasCollided = true;
-    			momentumX = 0;
-    			setX(0);
-    		}
-    	}
-    	if (hasCollided && MapTileCollisionHandler.lastCollidedTileX != null) {
-    		if (MapTileCollisionHandler.lastCollidedTileX.getTileType() == TileType.LETHAL) {
-    			levelState = LevelState.PLAYER_DEAD;
-    		}
-    	}
-    }	
-	
+
+    }
+
     @Override
     public void onEndCollisionCheckY(boolean hasCollided, Direction direction) {
         // if player collides with a map tile below it, it is now on the ground
@@ -308,12 +281,6 @@ public abstract class Player extends GameObject {
                 jumpForce = 0;
             }
         }
-        
-        if (hasCollided && MapTileCollisionHandler.lastCollidedTileY != null) {
-    		if (MapTileCollisionHandler.lastCollidedTileY.getTileType() == TileType.LETHAL) {
-    			levelState = LevelState.PLAYER_DEAD;
-    		}
-    	}
     }
 
     // other entities can call this method to hurt the player
